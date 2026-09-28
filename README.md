@@ -123,7 +123,9 @@ data/norland/     bundled benchmark collection
 
 ## Tests
 
-`pytest -q` runs 13 tests, and GitHub Actions runs them on every push, then posts the benchmark table to the run summary. The tests cover metric correctness against hand-computed values, filter behaviour across SQL/NumPy/Qdrant, FTS injection safety, **identical results from Qdrant and NumPy**, reranker save/load, LLM-reranker fallback on unparseable output, and a **quality regression gate** that fails the build if hybrid Recall@10 drops below 0.85 or stops beating BM25.
+`pytest -q` runs 14 tests, and GitHub Actions runs them on every push, then posts the benchmark table to the run summary. The tests cover metric correctness against hand-computed values, filter behaviour across SQL/NumPy/Qdrant, FTS injection safety, **identical results from Qdrant and NumPy**, reranker save/load, LLM-reranker fallback on unparseable output, a **quality regression gate** that fails the build if hybrid Recall@10 drops below 0.85 or stops beating BM25, and a **concurrency test** checking that parallel searches return exactly the same results as sequential ones.
+
+That last test comes from a real bug. When [rag-eval-harness](https://github.com/samSignal/rag-eval-harness) ran questions in parallel on Python 3.12, its scores varied from run to run. The cause was one SQLite connection shared by several threads, which occasionally returned rows from another query. The fix serialises access to the connection, and the test fails without it.
 
 ## License
 
