@@ -1,6 +1,7 @@
 """HybridSearcher: full-text + dense retrieval, fusion, filters and optional reranking."""
 from __future__ import annotations
 
+import threading
 import time
 from dataclasses import dataclass, field
 from functools import lru_cache
@@ -40,6 +41,7 @@ class HybridSearcher:
         self.vectors = vector_store or NumpyVectorStore()
         self.fulltext = fulltext or FullTextIndex()
         self.docs: dict[str, Document] = {}
+        self._encode_lock = threading.Lock()  # encoders (tokenizers, HTTP clients) are not guaranteed thread-safe
         self._embed_query = lru_cache(maxsize=1024)(self._embed_query_uncached)
 
     def index(self, docs: list[Document], batch_size: int = 256) -> None:
@@ -51,7 +53,8 @@ class HybridSearcher:
         self.docs.update({d.id: d for d in docs})
 
     def _embed_query_uncached(self, query: str) -> np.ndarray:
-        return self.encoder.encode([query])[0]
+        with self._encode_lock:
+            return self.encoder.encode([query])[0]
 
     def search(self, query: str, k: int = 10, mode: str = "hybrid", filters: Filters | None = None,
                candidates: int = 50, fusion: str = "rrf", weights: list[float] | None = None,

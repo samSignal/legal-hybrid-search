@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import re
 import sqlite3
+import threading
 from pathlib import Path
 
 from .corpus import Document
@@ -28,6 +29,9 @@ def query_terms(text: str) -> list[str]:
 class FullTextIndex:
     def __init__(self, path: str | Path = ":memory:", title_weight: float = 2.0):
         self.conn = sqlite3.connect(str(path), check_same_thread=False)
+        # One connection is shared by all threads (e.g. an API server or a parallel evaluation run).
+        # sqlite3 connections are not safe for concurrent use, so every access is serialised.
+        self._lock = threading.Lock()
         self.title_weight = title_weight
         self.conn.executescript("""
             CREATE TABLE IF NOT EXISTS docs (rowid INTEGER PRIMARY KEY, id TEXT UNIQUE, meta TEXT);
@@ -36,7 +40,7 @@ class FullTextIndex:
         """)
 
     def add(self, docs: list[Document]) -> None:
-        with self.conn:
+        with self._lock, self.conn:
             for d in docs:
                 old = self.conn.execute("SELECT rowid FROM docs WHERE id = ?", (d.id,)).fetchone()
                 if old:  # re-indexing a document replaces it
@@ -48,7 +52,8 @@ class FullTextIndex:
                                   (cur.lastrowid, d.title, d.text))
 
     def __len__(self) -> int:
-        return self.conn.execute("SELECT COUNT(*) FROM docs").fetchone()[0]
+        with self._lock:
+            return self.conn.execute("SELECT COUNT(*) FROM docs").fetchone()[0]
 
     def search(self, query: str, k: int = 10, filters: Filters | None = None) -> list[tuple[str, float]]:
         """Return (doc id, BM25 score) pairs, higher is better.
@@ -61,11 +66,15 @@ class FullTextIndex:
             return []
         match = " OR ".join(f'"{t}"' for t in terms)
         where, params = to_sql(filters, "d.meta")
-        rows = self.conn.execute(
+        with self._lock:
+            rows = self._query(match, where, params, k)
+        return [(r[0], float(r[1])) for r in rows]
+
+    def _query(self, match: str, where: str, params: list, k: int) -> list[tuple]:
+        return self.conn.execute(
             f"""SELECT d.id, -bm25(docs_fts, ?, 1.0) AS score
                 FROM docs_fts JOIN docs d ON d.rowid = docs_fts.rowid
                 WHERE docs_fts MATCH ? AND {where}
                 ORDER BY score DESC LIMIT ?""",
             [self.title_weight, match, *params, k],
         ).fetchall()
-        return [(r[0], float(r[1])) for r in rows]
