@@ -71,3 +71,16 @@ def test_chunked_documents_are_searchable(encoder):
     s.index(chunk_documents([long], max_words=200, overlap=40))
     hit = s.search("parking spaces", k=1, mode="bm25").hits[0]
     assert hit.doc.doc_id == "BIG" and "parking" in hit.doc.text
+
+
+def test_concurrent_searches_match_sequential(searcher, dataset):
+    """Regression test: parallel callers (API workers, parallel eval runs) must get identical results."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    queries = [q.text for q in dataset[1] + dataset[2]] * 4
+    searcher._embed_query.cache_clear()
+    sequential = [[h.doc.id for h in searcher.search(q, k=5).hits] for q in queries]
+    searcher._embed_query.cache_clear()
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        parallel = list(pool.map(lambda q: [h.doc.id for h in searcher.search(q, k=5).hits], queries))
+    assert parallel == sequential
