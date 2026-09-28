@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "legal-hybrid-search"
+version = "1.0.0"
+description = "Hybrid legal document search: SQLite FTS5 BM25 + dense embeddings + Qdrant, filters, RRF fusion, learned reranking and IR evaluation."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "numpy>=1.26",
+    "scikit-learn>=1.3",
+    "wordllama>=0.3",
+    "qdrant-client>=1.9",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+api = ["fastapi>=0.110", "uvicorn[standard]>=0.29"]
+openai = ["openai>=1.40"]
+dev = ["pytest>=8.0", "httpx>=0.27", "fastapi>=0.110"]
+
+[project.scripts]
+legalsearch = "legalsearch.cli:main"
+
+[tool.setuptools]
+packages = ["legalsearch"]
