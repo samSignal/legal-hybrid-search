@@ -1,0 +1,56 @@
+{"_id": "q01", "text": "How long can a trial period at a new job last?", "metadata": {"split": "train"}}
+{"_id": "q02", "text": "Can my boss make me work more than 40 hours a week?", "metadata": {"split": "test"}}
+{"_id": "q03", "text": "Am I entitled to a lunch break?", "metadata": {"split": "train"}}
+{"_id": "q04", "text": "How many vacation days do I get per year?", "metadata": {"split": "test"}}
+{"_id": "q05", "text": "Who pays my salary when I am off sick?", "metadata": {"split": "train"}}
+{"_id": "q06", "text": "How much notice must my employer give before firing me after 5 years of work?", "metadata": {"split": "test"}}
+{"_id": "q07", "text": "compensation paid when you get laid off", "metadata": {"split": "train"}}
+{"_id": "q08", "text": "I want to quit my job, how much notice do I have to give?", "metadata": {"split": "test"}}
+{"_id": "q09", "text": "Can I work from home as the parent of a toddler?", "metadata": {"split": "train"}}
+{"_id": "q10", "text": "time off for new dads", "metadata": {"split": "test"}}
+{"_id": "q11", "text": "Is a non-compete clause valid if the company pays me nothing?", "metadata": {"split": "train"}}
+{"_id": "q12", "text": "how often must salaries be paid", "metadata": {"split": "test"}}
+{"_id": "q13", "text": "women earn less than men for the same job", "metadata": {"split": "train"}}
+{"_id": "q14", "text": "overtime rate on a public holiday", "metadata": {"split": "test"}}
+{"_id": "q15", "text": "Can I take back my consent to data processing?", "metadata": {"split": "train"}}
+{"_id": "q16", "text": "deadline for a company to tell me what information it holds about me", "metadata": {"split": "test"}}
+{"_id": "q17", "text": "I want a company to delete my personal information", "metadata": {"split": "train"}}
+{"_id": "q18", "text": "our customer database was hacked, who must we notify and by when", "metadata": {"split": "test"}}
+{"_id": "q19", "text": "does my firm need to appoint a DPO", "metadata": {"split": "train"}}
+{"_id": "q20", "text": "cameras recording staff in the office", "metadata": {"split": "test"}}
+{"_id": "q21", "text": "receiving promotional emails I never agreed to", "metadata": {"split": "train"}}
+{"_id": "q22", "text": "maximum penalty for breaking privacy rules", "metadata": {"split": "test"}}
+{"_id": "q23", "text": "storing customer data on servers outside Europe", "metadata": {"split": "train"}}
+{"_id": "q24", "text": "can a 12 year old sign up to social media without parents", "metadata": {"split": "test"}}
+{"_id": "q25", "text": "how long may personal data be kept", "metadata": {"split": "train"}}
+{"_id": "q26", "text": "returning something I bought online", "metadata": {"split": "test"}}
+{"_id": "q27", "text": "who pays postage when sending back an online order", "metadata": {"split": "train"}}
+{"_id": "q28", "text": "can I return a sofa made to my measurements", "metadata": {"split": "test"}}
+{"_id": "q29", "text": "my phone broke after 18 months, is it still covered", "metadata": {"split": "train"}}
+{"_id": "q30", "text": "the shop refuses to fix a faulty product", "metadata": {"split": "test"}}
+{"_id": "q31", "text": "fake sale price compared to earlier price", "metadata": {"split": "train"}}
+{"_id": "q32", "text": "my order never arrived", "metadata": {"split": "test"}}
+{"_id": "q33", "text": "gym membership renewed automatically without warning", "metadata": {"split": "train"}}
+{"_id": "q34", "text": "voucher expired after six months", "metadata": {"split": "test"}}
+{"_id": "q35", "text": "seller ignores my complaint", "metadata": {"split": "train"}}
+{"_id": "q36", "text": "when will I get my money back after cancelling an online purchase", "metadata": {"split": "test"}}
+{"_id": "q37", "text": "landlord will not give back my deposit", "metadata": {"split": "train"}}
+{"_id": "q38", "text": "how often can the rent go up", "metadata": {"split": "test"}}
+{"_id": "q39", "text": "landlord comes into the flat without warning", "metadata": {"split": "train"}}
+{"_id": "q40", "text": "the heating is broken and the landlord does nothing", "metadata": {"split": "test"}}
+{"_id": "q41", "text": "I am moving out, how much notice do I give", "metadata": {"split": "train"}}
+{"_id": "q42", "text": "landlord changed the locks to throw me out", "metadata": {"split": "test"}}
+{"_id": "q43", "text": "can I rent out a room in my rented apartment", "metadata": {"split": "train"}}
+{"_id": "q44", "text": "the flat was sold and the new owner wants me out", "metadata": {"split": "test"}}
+{"_id": "q45", "text": "can I keep my guide dog in a rented flat", "metadata": {"split": "train"}}
+{"_id": "q46", "text": "tenant has not paid rent for three months", "metadata": {"split": "test"}}
+{"_id": "q47", "text": "minimum capital to start a limited company", "metadata": {"split": "train"}}
+{"_id": "q48", "text": "deadline for filing annual accounts", "metadata": {"split": "test"}}
+{"_id": "q49", "text": "company cannot pay its debts, what must the director do", "metadata": {"split": "train"}}
+{"_id": "q50", "text": "does a small business need an auditor", "metadata": {"split": "test"}}
+{"_id": "q51", "text": "selling my shares to an outsider", "metadata": {"split": "train"}}
+{"_id": "q52", "text": "when can a company pay dividends", "metadata": {"split": "test"}}
+{"_id": "q53", "text": "how long must company documents be kept", "metadata": {"split": "train"}}
+{"_id": "q54", "text": "who counts as a beneficial owner", "metadata": {"split": "test"}}
+{"_id": "q55", "text": "director with a conflict of interest", "metadata": {"split": "train"}}
+{"_id": "q56", "text": "closing down a solvent company", "metadata": {"split": "test"}}
